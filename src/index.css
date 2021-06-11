@@ -1,0 +1,114 @@
+body {
+  margin: 0;
+  /* font-family: 'Architects Daughter', cursive; */
+  font-family: "Cinzel", serif;
+  /* font-family: 'Architects Daughter', cursive; */
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif; */
+  font-family: "Balsamiq Sans", cursive;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: "Architects Daughter", cursive;
+  /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', */
+  /* monospace; */
+}
+
+.container {
+  width: 1200px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+.btn {
+  /* font-family: 'Architects Daughter', cursive; */
+  /* font-family: 'Cinzel', serif; */
+  font-family: "Balsamiq Sans", cursive;
+  /* background-color: white; */
+  background-color: #4caf50;
+  color: white;
+  /* color: black; */
+  /* border: none;
+  border-radius: 4%; */
+  border: 0.3rem solid transparent;
+  border-radius: 3rem;
+  backface-visibility: hidden;
+  /* border: 2px solid black; */
+  padding: 8px 20px;
+  /* padding: 0.7rem 2rem; */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.btn:hover {
+  font-family: "Balsamiq Sans", cursive;
+  background-color: #4caf50;
+  color: white;
+  transform: perspective(1px) scale3d(1.044, 1.044, 1) translateZ(0) !important;
+}
+
+.btn-out {
+  background-color: #4caf50;
+  color: white;
+}
+.btn-out:hover {
+  background-color: #f44336;
+  color: white;
+}
+.btn-red {
+  background-color: #f44336;
+  color: white;
+}
+.btn-red:hover {
+  background-color: #f44336;
+  color: white;
+}
+input {
+  display: block;
+  width: 100%;
+  padding: 0 20px;
+  margin-bottom: 10px;
+  background: #e9eff6;
+  line-height: 40px;
+  border-width: 0;
+  border-radius: 20px;
+  font-family: "Balsamiq Sans", cursive;
+  box-sizing: border-box;
+}
+.home-page {
+  padding-top: 200px;
+  box-sizing: border-box;
+  height: 600px;
+  /* width: 1600px; */
+  background-size: contain;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+
+  background-image: linear-gradient(
+      to right,
+      rgba(47, 48, 58, 0.4),
+      rgba(47, 48, 58, 0.4)
+    ),
+    url(../src//components//HomePage/callbox.jpg);
+}
+.home-title{
+  text-align: center;
+    width: 696px;
+    height: 120px;
+    text-transform: uppercase;
+    font-size: 44px;
+    line-height: 1.364;
+    color: #ffffff;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    margin-bottom: 30px;
+}
