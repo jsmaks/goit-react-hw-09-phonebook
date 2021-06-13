@@ -32,8 +32,7 @@ const fetchContacts = () => async (dispatch) => {
   //     .catch((error) => dispatch(fetchContactsError(error)));
 };
 
-const addContact = (name, number) => (dispatch) => {
-   const data = { name, number };
+const addContact = (data) => (dispatch) => {
   dispatch(addContactRequest());
   axios
     .post("/contacts", data)
@@ -50,7 +49,7 @@ const deleteContact = (id) => (dispatch) => {
     .catch((error) => dispatch(deleteContactError(error.message)));
 };
 
-const editContact = ( id, name, number ) => dispatch => {
+const editContact = ( {id, name, number }) => dispatch => {
   
   const update = { name, number };
   

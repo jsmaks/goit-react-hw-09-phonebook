@@ -23,21 +23,19 @@ code {
   margin: 0 auto;
 }
 .btn {
-  /* font-family: 'Architects Daughter', cursive; */
-  /* font-family: 'Cinzel', serif; */
+  height: 50px;
+ 
   font-family: "Balsamiq Sans", cursive;
-  /* background-color: white; */
+
   background-color: #4caf50;
   color: white;
-  /* color: black; */
-  /* border: none;
-  border-radius: 4%; */
+
   border: 0.3rem solid transparent;
   border-radius: 3rem;
   backface-visibility: hidden;
-  /* border: 2px solid black; */
+
   padding: 8px 20px;
-  /* padding: 0.7rem 2rem; */
+ 
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -111,4 +109,14 @@ input {
     font-weight: 900;
     letter-spacing: 0.06em;
     margin-bottom: 30px;
+}
+.form_edit {
+  display: flex;
+  align-items: center;
+}
+.label_margin{
+  margin: 20px;
+}
+.contact__name{
+  margin: 20px;
 }

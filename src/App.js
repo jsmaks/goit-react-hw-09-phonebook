@@ -1,8 +1,9 @@
-import React, { Component, Suspense } from 'react';
+import { Suspense,  useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 import { authOperations } from './redux/auth';
 
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 import AppBar from './components/AppBar';
 
 import Phonebook from './pages/Phonebook';
@@ -27,58 +28,38 @@ import PublicRoute from './components/PublicRoute';
 //   import('./pages/Phonebook' /* webpackChunkName: "phonebook-page" */),
 // );
 
-class App extends Component {
-  componentDidMount() {
-    this.props.onGetCurrentUser();
-  }
-  render() {
-    return (
-      <Container>
-        <AppBar />
-        <Suspense fallback={<p>Загруз</p>}>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
+export default function App() {
+  const dispatch = useDispatch();
 
-            <PrivateRoute restricted path="/contacts" redirectTo="/login">
-              <Phonebook />
-            </PrivateRoute>
+  useEffect(() => {
+    dispatch(authOperations.getCurrentUser());
+  }, [dispatch])
+  return (
+    <Container>
+      <AppBar />
+      <Suspense fallback={<p>Загруз</p>}>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
 
-            <PublicRoute
-              path="/register"
-              restricted
-              component={RegisterPage}
-              redirectTo="/contacts"
-            />
+          <PrivateRoute restricted path="/contacts" redirectTo="/login">
+            <Phonebook />
+          </PrivateRoute>
 
-            <PublicRoute
-              path="/login"
-              restricted
-              component={LoginPage}
-              redirectTo="/contacts"
-            />
+          <PublicRoute
+            path="/register"
+            restricted
+            component={RegisterPage}
+            redirectTo="/contacts"
+          />
 
-          </Switch>
-        </Suspense>
-      </Container>
-    );
-  }
+          <PublicRoute
+            path="/login"
+            restricted
+            component={LoginPage}
+            redirectTo="/contacts"
+          />
+        </Switch>
+      </Suspense>
+    </Container>
+  );
 }
-
-const mapDispatchToProps = {
-  onGetCurrentUser: authOperations.getCurrentUser,
-};
-
-export default connect(null, mapDispatchToProps)(App);
-
-// const App = () => (
-//   <Container>
-//     <AppBar />
-
-//     <Switch>
-//       <Route exact path="/" component={HomePage} />
-//       <Route path='/contacts' component={Phonebook} />
-//       <Route path="/register" component={RegisterPage} />
-//       <Route path="/login" component={LoginPage} />
-//     </Switch>
-//   </Container>
-// );

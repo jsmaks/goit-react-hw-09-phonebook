@@ -1,4 +1,4 @@
-import React, { useState,  useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../redux/auth/';
 
@@ -15,23 +15,18 @@ const styles = {
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [registerData, setRegisterData] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
 
-  const handleChangeName = e => {
-    setName(e.currentTarget.value);
-  };
-
-  const handleChangeEmail = e => {
-    setEmail(e.currentTarget.value);
-  };
-
-  const handleChangePassword = e => {
-    setPassword(e.currentTarget.value);
-  };
-
-  // const onRegister = data => dispatch(authOperations.onRegister(data));
+  const handleChange = useCallback(e => {
+    const {
+      currentTarget: { name, value },
+    } = e;
+    setRegisterData(prev => ({ ...prev, [name]: value }));
+  }, []);
 
   const onRegister = useCallback(
     data => dispatch(authOperations.register(data)),
@@ -40,14 +35,9 @@ export default function RegisterPage() {
   const handleSubmit = useCallback(
     e => {
       e.preventDefault();
-      const data = { name, email, password };
-      onRegister(data);
-      setName('');
-      setEmail('');
-      setPassword('');
-      
+      onRegister(registerData);
     },
-    [ onRegister,name, email, password],
+    [onRegister, registerData],
   );
 
   return (
@@ -60,8 +50,8 @@ export default function RegisterPage() {
           <input
             type="text"
             name="name"
-            value={name}
-            onChange={handleChangeName}
+            value={registerData.name}
+            onChange={handleChange}
           />
         </label>
 
@@ -70,8 +60,8 @@ export default function RegisterPage() {
           <input
             type="email"
             name="email"
-            value={email}
-            onChange={handleChangeEmail}
+            value={registerData.email}
+            onChange={handleChange}
           />
         </label>
 
@@ -80,8 +70,8 @@ export default function RegisterPage() {
           <input
             type="password"
             name="password"
-            value={password}
-            onChange={handleChangePassword}
+            value={registerData.password}
+            onChange={handleChange}
           />
         </label>
 

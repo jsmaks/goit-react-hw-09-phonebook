@@ -6,35 +6,32 @@ import './Form.css';
 
 export default function Form() {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [user, setUser] = useState({
+    name:'',
+    naumber:'',
+  })
 
-  const handleChangeName = e => {
-    setName(e.currentTarget.value);
-  };
 
-  const handleChangeNumber = e => {
-    setNumber(e.currentTarget.value);
-  };
+  const handleChange = useCallback(e=>{
+    const {currentTarget:{name, value}} = e;
+    setUser(prev=> ({...prev, [name]: value}))
+  },[])
 
   const libraryContacts = useSelector(contactsSelectors.getVisibleContacts);
 
-  const addContact = useCallback((name, number) =>
-  dispatch(contactOperations.addContact(name, number)), [dispatch])
 
   const checkOnDuplicate = useCallback( list => {
-    const nameLowerCase = name.toLowerCase();
+    const nameLowerCase = user.name.toLowerCase();
 
     list.find(({ name }) => name.toLowerCase() === nameLowerCase)
-      ? alert(`${name} is alredy in contacts`)
-      : addContact(name, number);
-  }, [addContact,name,number]) 
+      ? alert(`${user.name} is alredy in contacts`)
+      : dispatch(contactOperations.addContact(user));
+  }, [dispatch, user]) 
 
   const handleSubmit = useCallback(e => {
     e.preventDefault();
     checkOnDuplicate(libraryContacts);
-    setName('');
-    setNumber('');
+    setUser({name:'',number:''})
   },[checkOnDuplicate, libraryContacts]);
 
   return (
@@ -47,8 +44,8 @@ export default function Form() {
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
           title="Имя может состоять только из букв, апострофа, тире и пробелов. Например Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan и т. п."
           required
-          value={name}
-          onChange={handleChangeName}
+          value={user.name}
+          onChange={handleChange}
         />
       </label>
 
@@ -60,8 +57,8 @@ export default function Form() {
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           required
-          value={number}
-          onChange={handleChangeNumber}
+          value={user.number}
+          onChange={handleChange}
         />
       </label>
 

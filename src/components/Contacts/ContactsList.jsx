@@ -21,14 +21,14 @@ export default function Contacts() {
   }, []);
 
   return (
-    <div>
+    <div className="form__block">
       <ul className="contacts__list">
         {libraryContacts.map(el => (
           <li className="contacts__item" key={el.id}>
             <p className="contact__name">
               {el.name}:<span className="contact__tel">{el.number}</span>
             </p>
-            <button className="btn btn-red" onClick={() => onDelete(el.id)}>
+            <button className="btn btn-red btn-margin" onClick={() => onDelete(el.id)}>
               Delete
             </button>
             {editContact && idContact === el.id ? (

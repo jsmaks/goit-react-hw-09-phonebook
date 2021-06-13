@@ -15,16 +15,19 @@ const styles = {
 
 export default function LoginPage() {
   const dispatch = useDispatch();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const handleChangeEmail = e => {
-    setEmail(e.currentTarget.value);
-  };
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: '',
+  });
 
-  const handleChangePassword = e => {
-    setPassword(e.currentTarget.value);
-  };
+  const handleChange = useCallback(e => {
+    const {
+      currentTarget: { name, value },
+    } = e;
+    setLoginData(prev => ({ ...prev, [name]: value }));
+  }, []);
+
   const onLogin = useCallback(
     data => dispatch(authOperations.login(data)),
     [dispatch],
@@ -33,13 +36,10 @@ export default function LoginPage() {
   const handleSubmit = useCallback(
     e => {
       e.preventDefault();
-      const data = { email, password };
-      console.log(data);
-      onLogin(data);
-      setEmail('');
-      setPassword('');
+      onLogin(loginData);
+      setLoginData({ email: '', password: '' });
     },
-    [onLogin, email, password],
+    [onLogin, loginData],
   );
 
   return (
@@ -52,8 +52,8 @@ export default function LoginPage() {
           <input
             type="email"
             name="email"
-            value={email}
-            onChange={handleChangeEmail}
+            value={loginData.email}
+            onChange={handleChange}
           />
         </label>
 
@@ -62,8 +62,8 @@ export default function LoginPage() {
           <input
             type="password"
             name="password"
-            value={password}
-            onChange={handleChangePassword}
+            value={loginData.password}
+            onChange={handleChange}
           />
         </label>
 
