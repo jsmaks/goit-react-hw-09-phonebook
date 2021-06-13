@@ -34,19 +34,20 @@ export default function RegisterPage() {
   // const onRegister = data => dispatch(authOperations.onRegister(data));
 
   const onRegister = useCallback(
-    data => dispatch(authOperations.onRegister(data)),
+    data => dispatch(authOperations.register(data)),
     [dispatch],
   );
   const handleSubmit = useCallback(
     e => {
       e.preventDefault();
-      const data = { name, email };
+      const data = { name, email, password };
       onRegister(data);
       setName('');
       setEmail('');
       setPassword('');
+      
     },
-    [onRegister, name, email],
+    [ onRegister,name, email, password],
   );
 
   return (

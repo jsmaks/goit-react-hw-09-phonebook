@@ -51,7 +51,9 @@ const deleteContact = (id) => (dispatch) => {
 };
 
 const editContact = ( id, name, number ) => dispatch => {
+  
   const update = { name, number };
+  
 
   dispatch(editContactRequest());
 
